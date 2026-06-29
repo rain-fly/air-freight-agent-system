@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface FinancialRepository extends JpaRepository<Financial, Long> {
     List<Financial> findByShipmentId(Long shipmentId);
-    List<Financial>ByPaymentStatus(String paymentStatus);
+    List<Financial> findByPaymentStatus(String paymentStatus);
 }
