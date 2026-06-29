@@ -5,6 +5,7 @@ import Shipments from '@/views/Shipments.vue'
 import Bookings from '@/views/Bookings.vue'
 import Financials from '@/views/Financials.vue'
 import Customers from '@/views/Customers.vue'
+import MailClient from '@/views/MailClient.vue'
 
 const routes = [
     { path: '/', name: 'Dashboard', component: Dashboard, meta: { title: '首页概览' } },
@@ -13,6 +14,7 @@ const routes = [
     { path: '/bookings', name: 'Bookings', component: Bookings, meta: { title: '订舱管理' } },
     { path: '/financials', name: 'Financials', component: Financials, meta: { title: '财务管理' } },
     { path: '/customers', name: 'Customers', component: Customers, meta: { title: '客户管理' } },
+    { path: '/mail', name: 'MailClient', component: MailClient, meta: { title: '邮件客户端' } },
 ]
 
 const router = createRouter({

@@ -38,6 +38,10 @@
           <el-icon><User /></el-icon>
           <span>客户管理</span>
         </el-menu-item>
+        <el-menu-item index="/mail">
+          <el-icon><Message /></el-icon>
+          <span>邮件客户端</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
 

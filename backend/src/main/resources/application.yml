@@ -44,3 +44,8 @@ api:
     base-url: https://api.customs.gov/message/v1
   swift:
     base-url: https://api.swift.com/payments/v1
+
+# 邮件默认配置（可被数据库配置覆盖）
+mail:
+  default-pop3-port: 995
+  default-smtp-port: 465
