@@ -48,4 +48,29 @@ api:
 # 邮件默认配置（可被数据库配置覆盖）
 mail:
   default-pop3-port: 995
+  default-imap-port: 993
   default-smtp-port: 465
+
+# LLM与邮件分类配置
+llm:
+  # 默认服务商配置（实际密钥从数据库llm_configs表读取）
+  default-provider: OPENAI
+  default-model: gpt-3.5-turbo
+  timeout: 30000  # LLM调用超时时间（毫秒）
+
+# 邮件分类配置
+classification:
+  # 默认分类方法：RULE(规则)/LLM(AI)/HYBRID(混合)
+  default-method: HYBRID
+  # 规则分类置信度阈值，低于此值时混合模式会用LLM重新分类
+  rule-confidence-threshold: 0.7
+  # 默认分类列表
+  categories:
+    - 工作
+    - 商务
+    - 财务
+    - 通知
+    - 社交
+    - 营销
+    - 垃圾邮件
+    - 其他

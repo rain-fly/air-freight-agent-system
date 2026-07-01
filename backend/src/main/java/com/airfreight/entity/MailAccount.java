@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * 邮件客户端配置 - 保存POP3/SMTP邮箱账号配置
+ * 邮件客户端配置 - 保存POP3/IMAP/SMTP邮箱账号配置
  */
 @Data
 @Entity
@@ -32,11 +32,21 @@ public class MailAccount {
     private Integer smtpPort;             // SMTP端口（默认587或465）
     private Boolean smtpSsl;              // SMTP是否SSL
 
-    // POP3配置
-    @Column(nullable = false, length = 200)
+    // 收信协议类型: POP3 / IMAP
+    @Column(length = 10)
+    private String receiveProtocol;       // 收信协议（默认IMAP）
+
+    // POP3配置（当receiveProtocol=POP3时使用）
+    @Column(length = 200)
     private String pop3Host;              // POP3服务器
     private Integer pop3Port;             // POP3端口（默认995）
     private Boolean pop3Ssl;              // POP3是否SSL
+
+    // IMAP配置（当receiveProtocol=IMAP时使用）
+    @Column(length = 200)
+    private String imapHost;             // IMAP服务器
+    private Integer imapPort;            // IMAP端口（默认993）
+    private Boolean imapSsl;             // IMAP是否SSL
 
     @Column(length = 20)
     private String status;                // ACTIVE / DISABLED

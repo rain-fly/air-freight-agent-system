@@ -38,9 +38,17 @@
           <el-icon><User /></el-icon>
           <span>客户管理</span>
         </el-menu-item>
-        <el-menu-item index="/mail">
+        <el-menu-item index="/mail/messages">
           <el-icon><Message /></el-icon>
-          <span>邮件客户端</span>
+          <span>邮箱列表</span>
+        </el-menu-item>
+        <el-menu-item index="/mail/accounts">
+          <el-icon><Setting /></el-icon>
+          <span>邮箱配置</span>
+        </el-menu-item>
+        <el-menu-item index="/mail/llm-config">
+          <el-icon><Cpu /></el-icon>
+          <span>LLM配置</span>
         </el-menu-item>
       </el-menu>
     </el-aside>

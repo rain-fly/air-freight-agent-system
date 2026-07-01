@@ -179,6 +179,102 @@ CREATE TABLE IF NOT EXISTS notifications (
     INDEX idx_notify_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- 邮箱账号表
+CREATE TABLE IF NOT EXISTS mail_accounts (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    account_name VARCHAR(100) NOT NULL,
+    email_address VARCHAR(200) NOT NULL,
+    password VARCHAR(200) NOT NULL,
+    smtp_host VARCHAR(200) NOT NULL,
+    smtp_port INT,
+    smtp_ssl BIT(1),
+    receive_protocol VARCHAR(10) DEFAULT 'IMAP',
+    pop3_host VARCHAR(200),
+    pop3_port INT,
+    pop3_ssl BIT(1),
+    imap_host VARCHAR(200),
+    imap_port INT,
+    imap_ssl BIT(1),
+    status VARCHAR(20) DEFAULT 'ACTIVE',
+    last_check_at DATETIME,
+    created_at DATETIME,
+    updated_at DATETIME,
+    INDEX idx_email_address (email_address)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 邮件记录表
+CREATE TABLE IF NOT EXISTS mail_messages (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    account_id BIGINT,
+    message_id VARCHAR(255),
+    direction VARCHAR(20),
+    from_address VARCHAR(200),
+    from_personal VARCHAR(200),
+    to_address VARCHAR(500),
+    cc_address VARCHAR(500),
+    bcc_address VARCHAR(500),
+    subject VARCHAR(500),
+    content TEXT,
+    content_html TEXT,
+    has_attachments BIT(1),
+    attachment_names TEXT,
+    is_read BIT(1),
+    is_starred BIT(1),
+    priority VARCHAR(20),
+    sent_date DATETIME,
+    received_date DATETIME,
+    category VARCHAR(50),
+    tags VARCHAR(200),
+    classification_method VARCHAR(50),
+    classification_confidence DECIMAL(4,3),
+    classification_reason TEXT,
+    is_classified BIT(1),
+    classified_at DATETIME,
+    created_at DATETIME,
+    FOREIGN KEY (account_id) REFERENCES mail_accounts(id),
+    INDEX idx_account_id (account_id),
+    INDEX idx_direction (direction),
+    INDEX idx_category (category)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- LLM配置表
+CREATE TABLE IF NOT EXISTS llm_configs (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    provider VARCHAR(20) NOT NULL,
+    api_key VARCHAR(500),
+    base_url VARCHAR(500),
+    model VARCHAR(100),
+    temperature DOUBLE,
+    max_tokens INT,
+    api_version VARCHAR(20),
+    is_active BIT(1) DEFAULT 0,
+    classification_prompt TEXT,
+    remark VARCHAR(500),
+    created_at DATETIME,
+    updated_at DATETIME,
+    INDEX idx_provider (provider),
+    INDEX idx_is_active (is_active)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 分类规则表
+CREATE TABLE IF NOT EXISTS classification_rules (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    field VARCHAR(20) NOT NULL,
+    keywords VARCHAR(500),
+    category VARCHAR(50),
+    tags VARCHAR(200),
+    confidence DECIMAL(4,3),
+    is_active BIT(1) DEFAULT 1,
+    priority INT DEFAULT 0,
+    description VARCHAR(500),
+    created_at DATETIME,
+    updated_at DATETIME,
+    INDEX idx_is_active (is_active),
+    INDEX idx_priority (priority)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- 插入测试数据
 INSERT INTO customers (name, type, contact_person, phone, email, country, swift_code, created_at, updated_at)
 VALUES 

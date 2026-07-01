@@ -5,7 +5,9 @@ import Shipments from '@/views/Shipments.vue'
 import Bookings from '@/views/Bookings.vue'
 import Financials from '@/views/Financials.vue'
 import Customers from '@/views/Customers.vue'
-import MailClient from '@/views/MailClient.vue'
+import MailMessages from '@/views/MailMessages.vue'
+import MailAccounts from '@/views/MailAccounts.vue'
+import MailLlmConfig from '@/views/MailLlmConfig.vue'
 
 const routes = [
     { path: '/', name: 'Dashboard', component: Dashboard, meta: { title: '首页概览' } },
@@ -14,7 +16,10 @@ const routes = [
     { path: '/bookings', name: 'Bookings', component: Bookings, meta: { title: '订舱管理' } },
     { path: '/financials', name: 'Financials', component: Financials, meta: { title: '财务管理' } },
     { path: '/customers', name: 'Customers', component: Customers, meta: { title: '客户管理' } },
-    { path: '/mail', name: 'MailClient', component: MailClient, meta: { title: '邮件客户端' } },
+    { path: '/mail', redirect: '/mail/messages' },
+    { path: '/mail/messages', name: 'MailMessages', component: MailMessages, meta: { title: '邮箱列表' } },
+    { path: '/mail/accounts', name: 'MailAccounts', component: MailAccounts, meta: { title: '邮箱配置' } },
+    { path: '/mail/llm-config', name: 'MailLlmConfig', component: MailLlmConfig, meta: { title: 'LLM配置' } },
 ]
 
 const router = createRouter({
